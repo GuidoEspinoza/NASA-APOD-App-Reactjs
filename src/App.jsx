@@ -21,27 +21,23 @@ const App = () => {
   useEffect(() => {
     // * Función asincrónica para obtener datos de la API.
     const fetchAPIData = async () => {
-      const NASA_KEY = import.meta.env.JUST_NOTHING; // * Llave de la API desde variables de entorno.
+      const NASA_KEY = import.meta.env.VITE_API_SERIAL;
       const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}`;
-      const today = new Date().toDateString(); // * Fecha actual como string.
-      const localKey = `NASA-${today}`; // * Llave única para almacenamiento local.
-
-      // * Verificar si los datos ya están en el almacenamiento local.
-      if (localStorage.getItem(localKey)) {
-        const cachedData = JSON.parse(localStorage.getItem(localKey));
-        setData(cachedData);
-      } else {
-        localStorage.clear(); // * Limpiar datos obsoletos.
-        try {
-          const response = await fetch(url);
-          const apiData = await response.json();
-          localStorage.setItem(localKey, JSON.stringify(apiData));
-          setData(apiData);
-        } catch (error) {
-          console.error("Error fetching API data:", error.message);
+  
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
         }
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Mostrar un mensaje de error más específico al usuario
+        setError('No se pudieron obtener los datos de la NASA. Por favor, verifica tu conexión a internet o intenta más tarde.');
+      } finally {
+        setLoading(false);
       }
-      setLoading(false); // * Finalizar estado de carga.
     };
 
     fetchAPIData();
