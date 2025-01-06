@@ -1,0 +1,22 @@
+.loadingState {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    flex           : 1;
+}
+
+.loadingState i {
+    opacity  : 0.2;
+    font-size: 3rem;
+    animation: loadingSpin 1s linear infinite;
+}
+
+@keyframes loadingSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

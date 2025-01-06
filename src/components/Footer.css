@@ -1,0 +1,50 @@
+.footer {
+    position       : fixed;
+    bottom         : 0;
+    left           : 0;
+    width          : 100%;
+    display        : flex;
+    align-items    : center;
+    justify-content: space-between;
+    gap            : 1rem;
+    padding        : 1rem;
+}
+
+.bgGradient {
+    position  : absolute;
+    inset     : 0;
+    z-index   : -1;
+    background: linear-gradient(to top, #030615, rgba(255, 255, 255, 0));
+}
+
+.footerData {
+    display       : flex;
+    flex-direction: column;
+}
+
+.footerTitle {
+    font-size: 0.9rem;
+}
+
+.footerSubtitle {
+    font-size  : 1.4rem;
+    font-weight: 200;
+}
+
+.footerButton {
+    background         : transparent;
+    border             : none;
+    outline            : none;
+    color              : #fff;
+    padding            : 1rem;
+    transition-duration: 200ms;
+    cursor             : pointer;
+}
+
+.footerButtonIcon {
+    font-size: 1.3rem;
+}
+
+.footerButton:hover {
+    opacity: 0.7;
+}
